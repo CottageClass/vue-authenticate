@@ -36,9 +36,6 @@ export default class OAuth2 {
     this.options = options
   }
 
-  console.debug("Log some shit")
-  console.debug(this)
-
   init(userData) {
     let stateName = this.providerConfig.name + '_state';
     if (isFunction(this.providerConfig.state)) {

@@ -1,5 +1,5 @@
 /*!
- * vue-authenticate v1.3.5-beta.1
+ * vue-authenticate v1.3.5-beta.1--FORKED
  * https://github.com/dgrubelic/vue-authenticate
  * Released under the MIT License.
  */
@@ -1055,9 +1055,12 @@ OAuth2.prototype.init = function init (userData) {
   var url = [this.providerConfig.authorizationEndpoint, this._stringifyRequestParams()].join('?');
 
   this.oauthPopup = new OAuthPopup(url, this.providerConfig.name, this.providerConfig.popupOptions);
-    
+
   return new Promise(function (resolve, reject) {
     this$1.oauthPopup.open(this$1.providerConfig.redirectUri).then(function (response) {
+      console.debug("YO");
+      console.debug(Object.entries(response));
+
       if (this$1.providerConfig.responseType === 'token' || !this$1.providerConfig.url) {
         return resolve(response)
       }
@@ -1077,7 +1080,7 @@ OAuth2.prototype.init = function init (userData) {
  * Exchange temporary oauth data for access token
  * @author Sahat Yalkabov <https://github.com/sahat>
  * @copyright Method taken from https://github.com/sahat/satellizer
- * 
+ *
  * @param{[type]} oauth  [description]
  * @param{[type]} userData [description]
  * @return {[type]}        [description]
@@ -1116,7 +1119,11 @@ OAuth2.prototype.exchangeForToken = function exchangeForToken (oauth, userData) 
     exchangeTokenUrl = this.providerConfig.url;
   }
 
-  return this.$http.post(exchangeTokenUrl, payload, {
+  console.debug("ABOUT TO EXCHANGE TOKEN to ", exchangeTokenUrl);
+  console.debug(payload);
+  console.debug(this.options.withCredentials);
+
+  return this.$http.get(exchangeTokenUrl, payload, {
     withCredentials: this.options.withCredentials
   })
 };
@@ -1125,7 +1132,7 @@ OAuth2.prototype.exchangeForToken = function exchangeForToken (oauth, userData) 
  * Stringify oauth params
  * @author Sahat Yalkabov <https://github.com/sahat>
  * @copyright Method taken from https://github.com/sahat/satellizer
- * 
+ *
  * @return {String}
  */
 OAuth2.prototype._stringifyRequestParams = function _stringifyRequestParams () {
@@ -1354,7 +1361,7 @@ VueAuthenticate.prototype.logout = function logout (requestOptions) {
 
 /**
  * Authenticate user using authentication provider
- * 
+ *
  * @param{String} provider     Provider name
  * @param{Object} userData     User data
  * @param{Object} requestOptions Request options
