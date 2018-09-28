@@ -36,6 +36,9 @@ export default class OAuth2 {
     this.options = options
   }
 
+  console.debug("Log some shit")
+  console.debug(this)
+
   init(userData) {
     let stateName = this.providerConfig.name + '_state';
     if (isFunction(this.providerConfig.state)) {
@@ -50,6 +53,9 @@ export default class OAuth2 {
 
     return new Promise((resolve, reject) => {
       this.oauthPopup.open(this.providerConfig.redirectUri).then((response) => {
+        console.debug("YO")
+        console.debug(Object.entries(response))
+
         if (this.providerConfig.responseType === 'token' || !this.providerConfig.url) {
           return resolve(response)
         }
