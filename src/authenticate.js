@@ -190,7 +190,7 @@ export default class VueAuthenticate {
 
   /**
    * Authenticate user using authentication provider
-   * 
+   *
    * @param  {String} provider       Provider name
    * @param  {Object} userData       User data
    * @param  {Object} requestOptions Request options
